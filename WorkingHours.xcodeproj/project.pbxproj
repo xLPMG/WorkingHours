@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D9F7DD992D31D1630048D920 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D9F7DD982D31D15D0048D920 /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D9F7DD732D31C4280048D920 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,13 +31,14 @@
 		D9F7DD5E2D31C4270048D920 /* WorkingHours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkingHours.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F7DD722D31C4280048D920 /* WorkingHoursTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkingHoursTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F7DD7C2D31C4280048D920 /* WorkingHoursUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkingHoursUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9F7DD982D31D15D0048D920 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		D9F7DD842D31C4280048D920 /* Exceptions for "WorkingHours" folder in "WorkingHours" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				App/Info.plist,
 			);
 			target = D9F7DD5D2D31C4270048D920 /* WorkingHours */;
 		};
@@ -92,6 +97,7 @@
 				D9F7DD752D31C4280048D920 /* WorkingHoursTests */,
 				D9F7DD7F2D31C4280048D920 /* WorkingHoursUITests */,
 				D9F7DD5F2D31C4270048D920 /* Products */,
+				D9F7DD982D31D15D0048D920 /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -225,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9F7DD992D31D1630048D920 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +294,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = WorkingHours/WorkingHours.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WorkingHours/App/WorkingHours.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WorkingHours/Preview Content\"";
@@ -295,7 +303,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WorkingHours/Info.plist;
+				INFOPLIST_FILE = WorkingHours/App/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -327,7 +335,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = WorkingHours/WorkingHours.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WorkingHours/App/WorkingHours.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WorkingHours/Preview Content\"";
@@ -335,7 +344,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WorkingHours/Info.plist;
+				INFOPLIST_FILE = WorkingHours/App/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
