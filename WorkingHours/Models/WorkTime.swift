@@ -7,27 +7,52 @@
 
 import Foundation
 
-struct WorkTime {
+class WorkTime: ObservableObject {
 
-    var start: Date
-    var end: Date?
-    var wage: Double?
+    @Published var start: Timestamp
+    @Published var end: Timestamp?
+    @Published var wage: Double?
 
-    init(start: Date, end: Date? = nil, wage: Double? = nil) {
+    init(start: Timestamp, end: Timestamp? = nil, wage: Double? = nil) {
         self.start = start
         self.end = end
         self.wage = wage
     }
 
-    var duration: TimeInterval {
-        let endDate = end ?? Date()
-        return endDate.timeIntervalSince(start)
-
+    var durationInSeconds: Int {
+        if let end {
+            return start.durationBetweenInSeconds(other: end)
+        }else {
+            let currentDate = Date()
+            let calendar = Calendar.current
+            let hour = calendar.component(.hour, from: currentDate)
+            let minute = calendar.component(.minute, from: currentDate)
+            let second = calendar.component(.second, from: currentDate)
+            
+            let now = Timestamp(hour: hour, minute: minute, second: second)
+            return start.durationBetweenInSeconds(other: now)
+        }
+    }
+    
+    var duration: Duration {
+        if let end {
+            return start.durationBetween(other: end)
+        }else {
+            let currentDate = Date()
+            let calendar = Calendar.current
+            let hour = calendar.component(.hour, from: currentDate)
+            let minute = calendar.component(.minute, from: currentDate)
+            let second = calendar.component(.second, from: currentDate)
+            
+            let now = Timestamp(hour: hour, minute: minute, second: second)
+            return start.durationBetween(other: now)
+        }
     }
 
-    var earmnings: Double {
+    var earnings: Double {
         guard let wage else { return 0 }
-        return duration * wage
+        let workedHours = Double(durationInSeconds) / 3600
+        return workedHours * wage
     }
 
 }

@@ -19,8 +19,7 @@ struct WorkDaysRow: View {
             
             Spacer()
             
-            let formatter = DateComponentsFormatter()
-            Text("\(formatter.string(from: workDay.getTotalWorkTime())!)")
+            Text("\(workDay.getTotalWorkTime().formatted(.units(width: .narrow)))")
         }
     }
 }

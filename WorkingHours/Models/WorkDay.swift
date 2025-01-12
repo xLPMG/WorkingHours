@@ -6,34 +6,37 @@
 //
 
 import Foundation
+import SwiftUICore
 
-struct WorkDay {
+class WorkDay {
     var id: String
     
-    var year: Int
-    var month: Int
-    var day: Int
+    @Published var date: SimpleDate
     
-    var workTimes: [WorkTime] = []
+    @Published var workTimes: [WorkTime] = []
+    
+    init (date: SimpleDate) {
+        self.date = date
+        id = "\(date.day)-\(date.month)-\(date.year)"
+    }
 
-    init(date: Date) {
+    convenience init(date: Date) {
         let components = Calendar.current.dateComponents(
             [.year, .month, .day], from: date)
         
-        self.year = components.year!
-        self.month = components.month!
-        self.day = components.day!
-        
-        id = "\(day)-\(month)-\(year)"
+        self.init(date: SimpleDate(day: components.day!, month: components.month!, year: components.year!))
     }
     
     func getDateString() -> String {
-        return "\(day).\(month).\(year)"
+        return "\(date.day).\(date.month).\(date.year)"
     }
     
-    func getTotalWorkTime() -> TimeInterval {
-        let workTimesSum = workTimes.reduce(0) { $0 + $1.duration }
-        return workTimesSum
+    func getTotalWorkTimeInSeconds() -> Int {
+        return workTimes.reduce(0) { $0 + $1.durationInSeconds }
+    }
+    
+    func getTotalWorkTime() -> Duration {
+        return Duration.seconds(getTotalWorkTimeInSeconds())
     }
 
 }

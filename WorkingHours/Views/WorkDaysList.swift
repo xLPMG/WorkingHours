@@ -10,7 +10,7 @@ import SwiftUI
 
 struct WorkDaysList: View {
  
-    @State var workDays: [WorkDay]
+    var workDays: [WorkDay]
     
     var body: some View {
         
