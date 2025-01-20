@@ -6,11 +6,10 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct WorkDaysRow: View {
     
-    @State var workDay: WorkDay
+    @ObservedObject var workDay: WorkDay
     
     var body: some View {
         
@@ -19,7 +18,17 @@ struct WorkDaysRow: View {
             
             Spacer()
             
-            Text("\(workDay.getTotalWorkTime().formatted(.units(width: .narrow)))")
+            VStack {
+                if workDay.earnings > 0 {
+                    Text(String(format: "%.2f€", workDay.earnings))
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .font(.body)
+                }
+                
+                Text(workDay.getTotalWorkTime().formatted(.units(width: .narrow)))
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .fontWeight(.bold)
+            }
         }
     }
 }

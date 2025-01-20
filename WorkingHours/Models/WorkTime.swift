@@ -7,16 +7,16 @@
 
 import Foundation
 
-class WorkTime: ObservableObject {
+class WorkTime: ObservableObject, CustomStringConvertible {
 
     @Published var start: Timestamp
     @Published var end: Timestamp?
-    @Published var wage: Double?
+    @Published var hourlyRate: Double?
 
-    init(start: Timestamp, end: Timestamp? = nil, wage: Double? = nil) {
+    init(start: Timestamp, end: Timestamp? = nil, hourlyRate: Double? = nil) {
         self.start = start
         self.end = end
-        self.wage = wage
+        self.hourlyRate = hourlyRate
     }
 
     var durationInSeconds: Int {
@@ -25,11 +25,11 @@ class WorkTime: ObservableObject {
         }else {
             let currentDate = Date()
             let calendar = Calendar.current
-            let hour = calendar.component(.hour, from: currentDate)
-            let minute = calendar.component(.minute, from: currentDate)
-            let second = calendar.component(.second, from: currentDate)
+            let hours = calendar.component(.hour, from: currentDate)
+            let minutes = calendar.component(.minute, from: currentDate)
+            let seconds = calendar.component(.second, from: currentDate)
             
-            let now = Timestamp(hour: hour, minute: minute, second: second)
+            let now = Timestamp(hours: hours, minutes: minutes, seconds: seconds)
             return start.durationBetweenInSeconds(other: now)
         }
     }
@@ -40,19 +40,24 @@ class WorkTime: ObservableObject {
         }else {
             let currentDate = Date()
             let calendar = Calendar.current
-            let hour = calendar.component(.hour, from: currentDate)
-            let minute = calendar.component(.minute, from: currentDate)
-            let second = calendar.component(.second, from: currentDate)
+            let hours = calendar.component(.hour, from: currentDate)
+            let minutes = calendar.component(.minute, from: currentDate)
+            let seconds = calendar.component(.second, from: currentDate)
             
-            let now = Timestamp(hour: hour, minute: minute, second: second)
+            let now = Timestamp(hours: hours, minutes: minutes, seconds: seconds)
             return start.durationBetween(other: now)
         }
     }
-
+    
     var earnings: Double {
-        guard let wage else { return 0 }
+        print("Computing earnings for WorkTime")
+        guard let hourlyRate else { return 0 }
         let workedHours = Double(durationInSeconds) / 3600
-        return workedHours * wage
+        return workedHours * hourlyRate
+    }
+    
+    var description: String {
+        return "WorkTime(start: \(start), end: \(end ?? Timestamp(hours:0,minutes:0,seconds:0)), duration: \(duration), earnings: \(earnings)"
     }
 
 }

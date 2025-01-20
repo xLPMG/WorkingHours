@@ -10,14 +10,30 @@ import SwiftData
 
 struct WorkDaysOverview: View {
     
+    @State private var isAddWorkTimeViewPresented = false
     @StateObject private var workDayManager = WorkDayManager()
     
     var body: some View {
-        
-        AddWorkTimeView(workDayManager: workDayManager)
-        
-        WorkDaysList(workDays: workDayManager.workDays)
-    }
+            NavigationView {
+                VStack {
+                    WorkDaysList(workDays: workDayManager.workDays)
+                    
+                    if isAddWorkTimeViewPresented {
+                        AddWorkTimeView(workDayManager: workDayManager, isPresented: $isAddWorkTimeViewPresented)
+                            .transition(.move(edge: .bottom)) // Optional animation when appearing/disappearing
+                    }
+                }
+                .navigationTitle("Work Days")
+                .navigationBarItems(trailing: Button(action: {
+                    withAnimation {
+                        isAddWorkTimeViewPresented.toggle() // Show or hide the AddWorkTimeView
+                    }
+                }) {
+                    Image(systemName: "plus")
+                        .font(.title)
+                })
+            }
+        }
 }
 
 #Preview {

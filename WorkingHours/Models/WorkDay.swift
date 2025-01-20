@@ -8,14 +8,18 @@
 import Foundation
 import SwiftUICore
 
-class WorkDay {
+class WorkDay: ObservableObject {
     var id: String
-    
+
     @Published var date: SimpleDate
-    
+
     @Published var workTimes: [WorkTime] = []
-    
-    init (date: SimpleDate) {
+
+    var earnings: Double {
+        return workTimes.reduce(0) { $0 + $1.earnings }
+    }
+
+    init(date: SimpleDate) {
         self.date = date
         id = "\(date.day)-\(date.month)-\(date.year)"
     }
@@ -23,18 +27,21 @@ class WorkDay {
     convenience init(date: Date) {
         let components = Calendar.current.dateComponents(
             [.year, .month, .day], from: date)
-        
-        self.init(date: SimpleDate(day: components.day!, month: components.month!, year: components.year!))
+
+        self.init(
+            date: SimpleDate(
+                day: components.day!, month: components.month!,
+                year: components.year!))
     }
-    
+
     func getDateString() -> String {
         return "\(date.day).\(date.month).\(date.year)"
     }
-    
+
     func getTotalWorkTimeInSeconds() -> Int {
         return workTimes.reduce(0) { $0 + $1.durationInSeconds }
     }
-    
+
     func getTotalWorkTime() -> Duration {
         return Duration.seconds(getTotalWorkTimeInSeconds())
     }
